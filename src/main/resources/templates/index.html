@@ -3,16 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IVIE - Phiên bản đơn giản</title>
+    <title>IVIE - BÁC SĨ ƠI</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
     <link rel="stylesheet" th:href="@{/css/contentmain.css}" />
     <link rel="stylesheet" th:href="@{/css/footer.css}" />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/overlay.css}" />
+    <link rel="stylesheet" th:href="@{/css/chatbox.css}" />
+    <link rel="stylesheet" th:href="@{/css/contact.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
   </head>
   <body>
-    <div th:replace="fragments/header :: siteHeader"></div>
+    <div th:replace="~{fragments/header :: siteHeader}"></div>
+    <div th:replace="~{pages/home :: homeContent}"></div>
+    <div th:replace="~{fragments/overlay :: overlay}"></div>
+    <div th:replace="~{fragments/contact :: contactSection}"></div>
+    <div th:replace="~{fragments/footer :: siteFooter}"></div>
+    
+    <div th:replace="~{fragments/chatbox :: chatBox}"></div>
 
-    <div th:replace="pages/home :: homeContent"></div>
+    <script th:src="@{/js/overlay.js}" defer></script>
+    <script th:src="@{/js/chatbox.js}" defer></script>
+    <script th:src="@{/js/main.js}" defer></script>
 
-    <div th:replace="fragments/footer :: siteFooter"></div>
   </body>
 </html>
