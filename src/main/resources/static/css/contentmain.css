@@ -35,13 +35,17 @@
   margin-bottom: 10px;
   margin-top: 0;
   letter-spacing: 1px;
+  text-align: center;
+  margin-left: -600px;
 }
 
 .ivie-subtitle {
   color: #1565c0;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 500;
   margin-bottom: 35px;
+  text-align: center;
+  margin-left: -600px;
 }
 
 .ivie-features {
@@ -185,6 +189,11 @@
   .ivie-features {
     justify-content: center;
   }
+  .ivie-title,
+  .ivie-subtitle {
+    margin-left: 0;
+    text-align: center;
+  }
 }
 
 /* Responsive chỉnh riêng cho phần QR app */
@@ -213,6 +222,12 @@
   }
   .ivie-title {
     font-size: 2rem;
+    margin-left: 0;
+    text-align: center;
+  }
+  .ivie-subtitle {
+    margin-left: 0;
+    text-align: center;
   }
   .ivie-feature-card {
     width: 140px;
@@ -243,7 +258,7 @@
   text-align: center;
 }
 .ivie-banner-title {
-  font-size: 2rem;
+  font-size: 1.4rem;
   font-weight: bold;
   color: #13a97b;
   margin-bottom: 8px;
@@ -414,4 +429,37 @@
   margin-bottom: 12px;
   color: #1565c0;
   font-family: "Pacifico", cursive, Arial, sans-serif;
+}
+.dots {
+  margin-top: 16px;
+  text-align: center;
+}
+.dot {
+  display: inline-block;
+  width: 16px;
+  height: 6px;
+  border-radius: 3px;
+  background: #d3e8e2;
+  margin: 0 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.dot.active {
+  background: #009966;
+}
+
+@media (max-width: 900px) {
+  .dot {
+    width: 12px;
+    height: 5px;
+    margin: 0 3px;
+  }
+}
+
+@media (max-width: 600px) {
+  .dot {
+    width: 9px;
+    height: 4px;
+    margin: 0 2px;
+  }
 }
