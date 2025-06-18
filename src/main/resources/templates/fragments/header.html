@@ -1,23 +1,121 @@
 <header th:fragment="siteHeader">
-  <div class="container">
-    <div class="logo">
-      <img
-        src="https://ivie.vn/_next/image?url=%2F_next%2Fstatic%2FIVIE_logo.svg&w=384&q=75"
-        alt="IVIE Logo"
-      />
+  <div class="body-custom">
+    <div class="top-bar">
+      <div class="hotline">
+        Hotline đặt khám:
+        <span style="margin-left: 5px">📞 1900 3367</span>
+      </div>
+      <div class="auth">
+        <i class="fa-regular fa-circle-user icon-user"></i>
+        <a href="#" id="loginBtn">Đăng nhập</a>
+      </div>
     </div>
-    <nav>
-      <ul>
-        <li><a href="#">Đặt khám</a></li>
-        <li><a href="#">Hỏi đáp bác sĩ</a></li>
-        <li><a href="#">Hồ sơ sức khỏe</a></li>
-        <li><a href="#">Tải App</a></li>
-        <li><a href="#">Trung tâm trợ giúp</a></li>
-      </ul>
-    </nav>
-    <div class="auth">
-      <a href="#">Đăng ký</a>
-      <a href="#">Đăng nhập</a>
+    <div class="main-header">
+      <div class="logo">
+        <img
+          src="https://ivie.vn/_next/image?url=%2F_next%2Fstatic%2FIVIE_logo.svg&w=384&q=75"
+          alt="Logo"
+        />
+      </div>
+      <nav class="nav">
+        <div class="dropdown-wrap" id="dropdownWrap">
+          <a href="javascript:void(0);" class="dropdown" id="dropdownBtn"
+            >Đặt khám</a
+          >
+          <div class="dropdown-menu" id="dropdownMenu">
+            <a href="#">Chuyên khoa</a>
+            <a href="#">Cơ sở y tế</a>
+            <a href="#">Bác sĩ</a>
+          </div>
+        </div>
+        <a href="#">Hỏi đáp bác sĩ</a>
+        <a href="#">Hồ sơ sức khỏe</a>
+      </nav>
+      <div class="menu-icon" id="menuIcon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
+    <!-- Đổi side-menu thành aside -->
+    <aside class="side-menu" id="sideMenu">
+      <button class="close-btn" id="closeMenu">&times;</button>
+      <div class="menu-section" style="margin-bottom: 8px">
+        <div
+          class="menu-title"
+          style="font-size: 18px; color: #00103a; font-weight: 600"
+        >
+            <a
+            href="#" id="loginBtn"
+            style="color: #00103a; text-decoration: none; margin-right: 12px"
+            >Đăng ký</a
+          >
+          / 
+          <a href="#" style="color: #00103a; text-decoration: none"
+          id="loginBtn">Đăng nhập</a
+          >
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="menu-section">
+        <div class="menu-links">
+          <a href="javascript:void(0);" class="dropdown" id="dropdownBtnMobile"
+            >Đặt khám</a
+          >
+          <div class="dropdown-content" id="dropdownContentMobile">
+            <a href="#">Chuyên khoa</a>
+            <a href="#">Cơ sở y tế</a>
+            <a href="#">Bác sĩ</a>
+          </div>
+          <a href="#">Hỏi đáp bác sĩ</a>
+          <a href="#">Hồ sơ sức khỏe</a>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="menu-section">
+        <div
+          class="menu-title"
+          style="font-size: 16px; color: #00103a; font-weight: 500"
+        >
+          Tải App
+        </div>
+        <div class="app-links">
+          <div>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+              alt="Google Play"
+              style="height: 40px"
+            />
+            <img
+              src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+              alt="App Store"
+              style="height: 40px"
+            />
+          </div>
+          <img
+            class="qr"
+            src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://ivie.vn"
+            alt="QR Code"
+          />
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="support-links">
+        <div class="support-box">
+          <span class="icon">📞</span>
+          <div style="font-size: 14px; color: #00103a">Hotline đặt khám:</div>
+          <div style="font-size: 18px; font-weight: 600; color: #009879">
+            1900 3367
+          </div>
+        </div>
+        <div class="support-box">
+          <span class="icon">⚙️</span>
+          <div style="font-size: 14px; color: #00103a">
+            Trung tâm<br />trợ giúp
+          </div>
+        </div>
+      </div>
+    </aside>
+    <div class="side-menu-overlay" id="sideMenuOverlay"></div>
   </div>
 </header>
