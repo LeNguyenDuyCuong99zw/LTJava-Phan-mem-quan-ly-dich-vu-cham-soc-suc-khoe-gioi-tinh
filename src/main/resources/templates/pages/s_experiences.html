@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education</title>
+    <link rel="stylesheet" th:href="@{/css/footer.css}" />
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/s_experiences.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div th:replace="~{fragments/header :: siteHeader(showTopBar=${false})}"></div>
+    <div class="contact_support support_banner">
+        <div class="container_support support-h">
+            <div class="contact_support-title">
+                <div class="contact_support-col">
+                    <div class="contact_support-hotline">
+                        <span class="support_title-text">Tổng đài hỗ trợ:</span>
+                        <a href="#" class="support_hotline">
+                            <i class="fa-solid fa-phone-volume ic-hotline"></i>
+                            <span class="link_hotline"> 0808099812</span>
+                        </a>
+                    </div>
+                    <div class="contact_support-search">
+                        <div class="search-box">
+                            <div class="search_input-banner">
+                                <i class="fa-solid fa-magnifying-glass ic-search" ></i>
+                                <input type="text" placeholder="Bạn cần hỗ trợ điều gì?" maxlength="200" class="search_input-text">
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <div class="education-intro">
+            <h1 class="education-intro__title">Kinh Nghiệm</h1>
+            <p class="education-intro__subtitle">Các bài viết về sức khỏe cung cấp cho bạn thông tin về xu hướng và hướng dẫn mới nhất.</p>
+        </div>
+
+        <div class="filter-bar">
+            <div class="filter-bar__item">
+                <select class="filter-bar__select">
+                    <option value="all">Lựa chọn</option>
+                    <option value="women">Sức khỏe phụ nữ</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="health-library">
+            <div class="health-library__card">
+                <a href="/page_s_1"><img class="health-library__card-image" src="https://mtalvernia.sg/wp-content/uploads/2024/03/hpv-vaccine-770x436-1.jpg" alt="Ung thư cổ tử cung"></a>
+                <div class="health-library__card-content">
+                    <span class="health-library__card-category">SỨC KHỎE PHỤ NỮ</span>
+                    <h3 class="health-library__card-title"><a href="/page_s_1">Những điều phụ nữ cần biết về ung thư cổ tử cung</a></h3>
+                </div>
+            </div>
+            <div class="health-library__card">
+                <a href="#"><img class="health-library__card-image" src="	https://mtalvernia.sg/wp-content/uploads/2024/01/Understanding-Potential-Pregnancy-Complications.jpg" alt="Biến chứng thai sản"></a>
+                <div class="health-library__card-content">
+                    <span class="health-library__card-category">SỨC KHỎE PHỤ NỮ</span>
+                    <h3 class="health-library__card-title"><a href="#">Hiểu về các biến chứng tiềm ẩn khi mang thai</a></h3>
+                </div>
+            </div>
+            <div class="health-library__card">
+                <a href="#"><img class="health-library__card-image" src="https://mtalvernia.sg/wp-content/uploads/2024/01/4-Things-You-Should-Know-About-Endometriosis.jpg" alt="Lạc nội mạc tử cung"></a>
+                <div class="health-library__card-content">
+                    <span class="health-library__card-category">SỨC KHỎE PHỤ NỮ</span>
+                    <h3 class="health-library__card-title"><a href="#">4 điều bạn nên biết về bệnh lạc nội mạc tử cung</a></h3>
+                </div>
+            </div>
+            <div class="health-library__card">
+                <a href="#"><img class="health-library__card-image" src="https://mtalvernia.sg/wp-content/uploads/2024/01/4-Things-You-Should-Know-About-Endometriosis.jpg" alt="Thai kỳ"></a>
+                <div class="health-library__card-content">
+                    <span class="health-library__card-category">SỨC KHỎE PHỤ NỮ</span>
+                    <h3 class="health-library__card-title"><a href="#">Sáu câu hỏi nóng bỏng về thai kỳ, dinh dưỡng và cơn đau chuyển dạ</a></h3>
+                </div>
+            </div>
+            <div class="health-library__card">
+                <a href="#"><img class="health-library__card-image" src="https://mtalvernia.sg/wp-content/uploads/2021/10/iStock-916013054.jpg" alt="Ung thư phụ khoa"></a>
+                <div class="health-library__card-content">
+                    <span class="health-library__card-category">SỨC KHỎE PHỤ NỮ</span>
+                    <h3 class="health-library__card-title"><a href="#">Hướng dẫn về ung thư phụ khoa</a></h3>
+                </div>
+            </div>
+            <div class="health-library__card">
+                <a href="#"><img class="health-library__card-image" src="	https://mtalvernia.sg/wp-content/uploads/2021/01/Personalised-Medicine-for-Breast-Cancer.jpg" alt="Ung thư vú"></a>
+                <div class="health-library__card-content">
+                    <span class="health-library__card-category">SỨC KHỎE PHỤ NỮ</span>
+                    <h3 class="health-library__card-title"><a href="#">Thuốc cá nhân hóa cho bệnh ung thư vú</a></h3>
+                </div>
+            </div>
+            <div class="health-library__card">
+                <a href="#"><img class="health-library__card-image" src="https://mtalvernia.sg/wp-content/uploads/2019/12/womens-cancers.jpg" alt="Ung thư phụ nữ"></a>
+                <div class="health-library__card-content">
+                    <span class="health-library__card-category">SỨC KHỎE PHỤ NỮ</span>
+                    <h3 class="health-library__card-title"><a href="#">Ung thư phụ nữ</a></h3>
+                </div>
+            </div>
+            <div class="health-library__card">
+                <a href="#"><img class="health-library__card-image" src="https://mtalvernia.sg/wp-content/uploads/2019/06/Common-Gynaecological-Disorders.jpg" alt="Rối loạn phụ khoa"></a>
+                <div class="health-library__card-content">
+                    <span class="health-library__card-category">SỨC KHỎE PHỤ NỮ</span>
+                    <h3 class="health-library__card-title"><a href="#">Các rối loạn phụ khoa thường gặp</a></h3>
+                </div>
+            </div>
+            <div class="health-library__card">
+                <a href="#"><img class="health-library__card-image" src="https://mtalvernia.sg/wp-content/uploads/2018/06/rsz_abc.jpg" alt="Phẫu thuật xâm lấn tối thiểu"></a>
+                <div class="health-library__card-content">
+                    <span class="health-library__card-category">SỨC KHỎE PHỤ NỮ</span>
+                    <h3 class="health-library__card-title"><a href="#">Điều trị các bệnh phụ khoa bằng phẫu thuật xâm lấn tối thiểu</a></h3>
+                </div>
+            </div>
+            <div class="health-library__card">
+                <a href="#"><img class="health-library__card-image" src="	https://mtalvernia.sg/wp-content/uploads/2018/04/pain.jpg" alt="U xơ tử cung"></a>
+                <div class="health-library__card-content">
+                    <span class="health-library__card-category">SỨC KHỎE PHỤ NỮ</span>
+                    <h3 class="health-library__card-title"><a href="#">U xơ tử cung và u nang</a></h3>
+                </div>
+            </div>
+            <div class="health-library__card">
+                <a href="#"><img class="health-library__card-image" src="https://mtalvernia.sg/wp-content/uploads/2018/03/feet.jpg" alt="Giày cho chân"></a>
+                <div class="health-library__card-content">
+                    <span class="health-library__card-category">SỨC KHỎE PHỤ NỮ</span>
+                    <h3 class="health-library__card-title"><a href="#">Giày cho chân</a></h3>
+                </div>
+            </div>
+            <div class="health-library__card">
+                <a href="#"><img class="health-library__card-image" src="	https://mtalvernia.sg/wp-content/uploads/2017/09/Abreast-e1582776835299.jpg" alt="Luôn cập nhật"></a>
+                <div class="health-library__card-content">
+                    <span class="health-library__card-category">SỨC KHỎE PHỤ NỮ</span>
+                    <h3 class="health-library__card-title"><a href="#">Luôn cập nhật</a></h3>
+                </div>
+            </div>
+        </div>
+        <div class="pagination">
+            <a href="#" class="pagination__item pagination__item--active">1</a>
+            <a href="#" class="pagination__item">2</a>
+            <a href="#" class="pagination__item">3</a>
+            <a href="#" class="pagination__item">4</a>
+            <a href="#" class="pagination__item">5</a>
+            <a href="#" class="pagination__arrow">&gt;</a>
+        </div>
+    </div>
+    
+    <div th:replace="~{fragments/footer :: siteFooter}"></div>
+    <div th:replace="~{fragments/chatbox :: chatBox}"></div>
+    <div th:replace="~{fragments/overlay :: overlay}"></div>
+    <script th:src="@{/js/main.js}" defer></script>
+    <script th:src="@{/js/overlay.js}" defer></script>
+    <script th:src="@{/js/chatbox.js}" defer></script>
+</body>
+</html>
