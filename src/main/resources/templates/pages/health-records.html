@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Hồ Sơ Sức Khỏe | HealthMate</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/contentmain.css}" />
+    <link rel="stylesheet" th:href="@{/css/footer.css}" />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/overlay.css}" />
+    <link rel="stylesheet" th:href="@{/css/chatbox.css}" />
+    <link rel="stylesheet" th:href="@{/css/contact.css}" />
+    <link rel="stylesheet" th:href="@{/css/hiemmuon.css}" />
+    <link rel="stylesheet" th:href="@{/css/appointment.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/appointment.css}" />
+        
+</head>
+<body>
+    <!-- Header tái sử dụng -->
+    <div th:replace="~{fragments/header :: siteHeader}"></div>
+
+    <div class="health-records-container">
+        <div class="page-header">
+            <h1><i class="fas fa-heartbeat"></i> Hồ Sơ Sức Khỏe</h1>
+            <p>Quản lý và theo dõi thông tin sức khỏe của bạn</p>
+        </div>
+
+        <div class="records-grid">
+            <!-- Form nhập liệu -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="fas fa-edit"></i>
+                    Cập Nhật Thông Tin
+                </h2>
+                
+                <form id="healthForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="height">Chiều cao (cm)</label>
+                            <input type="number" id="height" class="form-control" placeholder="170">
+                        </div>
+                        <div class="form-group">
+                            <label for="weight">Cân nặng (kg)</label>
+                            <input type="number" id="weight" class="form-control" placeholder="65">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bloodPressure">Huyết áp (mmHg)</label>
+                            <input type="text" id="bloodPressure" class="form-control" placeholder="120/80">
+                        </div>
+                        <div class="form-group">
+                            <label for="heartRate">Nhịp tim (bpm)</label>
+                            <input type="number" id="heartRate" class="form-control" placeholder="72">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bloodType">Nhóm máu</label>
+                        <select id="bloodType" class="form-control">
+                            <option value="">Chọn nhóm máu</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="allergies">Dị ứng</label>
+                        <textarea id="allergies" class="form-control" rows="3" placeholder="Nhập các dị ứng (nếu có)"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="medications">Thuốc đang sử dụng</label>
+                        <textarea id="medications" class="form-control" rows="3" placeholder="Nhập các loại thuốc đang sử dụng"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="medicalHistory">Tiền sử bệnh</label>
+                        <textarea id="medicalHistory" class="form-control" rows="3" placeholder="Nhập tiền sử bệnh"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-save"></i> Lưu Thông Tin
+                    </button>
+                </form>
+            </div>
+
+            <!-- Hiển thị thông tin -->
+            <div class="display-section">
+                <h2 class="section-title">
+                    <i class="fas fa-chart-line"></i>
+                    Thống Kê Sức Khỏe
+                </h2>
+
+                <div id="healthStats">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="bmiValue">--</div>
+                            <div class="stat-label">Chỉ số BMI</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="bmiCategory">--</div>
+                            <div class="stat-label">Phân loại</div>
+                        </div>
+                    </div>
+
+                    <div class="progress-section">
+                        <div class="progress-item">
+                            <div class="progress-label">
+                                <span>Sức khỏe tổng thể</span>
+                                <span id="overallHealth">85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="healthCards">
+                        <div class="health-card">
+                            <h3><i class="fas fa-user"></i> Thông Tin Cơ Bản</h3>
+                            <p><strong>Chiều cao:</strong> <span id="displayHeight">--</span> cm</p>
+                            <p><strong>Cân nặng:</strong> <span id="displayWeight">--</span> kg</p>
+                            <p><strong>Nhóm máu:</strong> <span id="displayBloodType">--</span></p>
+                        </div>
+
+                        <div class="health-card">
+                            <h3><i class="fas fa-heart"></i> Chỉ Số Tim Mạch</h3>
+                            <p><strong>Huyết áp:</strong> <span id="displayBloodPressure">--</span></p>
+                            <p><strong>Nhịp tim:</strong> <span id="displayHeartRate">--</span> bpm</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="emptyState" class="empty-state" style="display: none;">
+                    <i class="fas fa-clipboard-list"></i>
+                    <h3>Chưa có dữ liệu</h3>
+                    <p>Vui lòng nhập thông tin sức khỏe để xem thống kê</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div th:replace="~{pages/appointment-booking :: appointmentSection}"></div> -->
+
+    <div th:replace="~{fragments/footer :: siteFooter}"></div>
+
+    <!-- Hộp chat và Lớp phủ tái sử dụng -->
+    <div th:replace="~{fragments/chatbox :: chatBox}"></div>
+    <div th:replace="~{fragments/overlay :: overlay}"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script th:src="@{/js/main.js}" defer></script>
+    <script th:src="@{/js/chatbox.js}" defer></script>
+    
+    <script>
+        // Khởi tạo dữ liệu mẫu
+        let healthData = {
+            height: 170,
+            weight: 65,
+            bloodPressure: '120/80',
+            heartRate: 72,
+            bloodType: 'A+',
+            allergies: 'Không có',
+            medications: 'Không có',
+            medicalHistory: 'Không có'
+        };
+
+        // Load dữ liệu từ localStorage
+        function loadHealthData() {
+            const saved = localStorage.getItem('healthData');
+            if (saved) {
+                healthData = JSON.parse(saved);
+                updateForm();
+                updateDisplay();
+            }
+        }
+
+        // Lưu dữ liệu vào localStorage
+        function saveHealthData() {
+            localStorage.setItem('healthData', JSON.stringify(healthData));
+        }
+
+        // Cập nhật form
+        function updateForm() {
+            document.getElementById('height').value = healthData.height || '';
+            document.getElementById('weight').value = healthData.weight || '';
+            document.getElementById('bloodPressure').value = healthData.bloodPressure || '';
+            document.getElementById('heartRate').value = healthData.heartRate || '';
+            document.getElementById('bloodType').value = healthData.bloodType || '';
+            document.getElementById('allergies').value = healthData.allergies || '';
+            document.getElementById('medications').value = healthData.medications || '';
+            document.getElementById('medicalHistory').value = healthData.medicalHistory || '';
+        }
+
+        // Tính BMI
+        function calculateBMI(height, weight) {
+            if (height && weight) {
+                const heightInMeters = height / 100;
+                return (weight / (heightInMeters * heightInMeters)).toFixed(1);
+            }
+            return null;
+        }
+
+        // Phân loại BMI
+        function getBMICategory(bmi) {
+            if (bmi < 18.5) return 'Thiếu cân';
+            if (bmi < 25) return 'Bình thường';
+            if (bmi < 30) return 'Thừa cân';
+            return 'Béo phì';
+        }
+
+        // Cập nhật hiển thị
+        function updateDisplay() {
+            const hasData = healthData.height && healthData.weight;
+            
+            if (hasData) {
+                document.getElementById('emptyState').style.display = 'none';
+                document.getElementById('healthStats').style.display = 'block';
+                
+                // Cập nhật thông tin cơ bản
+                document.getElementById('displayHeight').textContent = healthData.height;
+                document.getElementById('displayWeight').textContent = healthData.weight;
+                document.getElementById('displayBloodType').textContent = healthData.bloodType;
+                document.getElementById('displayBloodPressure').textContent = healthData.bloodPressure;
+                document.getElementById('displayHeartRate').textContent = healthData.heartRate;
+                
+                // Tính và hiển thị BMI
+                const bmi = calculateBMI(healthData.height, healthData.weight);
+                const bmiCategory = getBMICategory(bmi);
+                
+                document.getElementById('bmiValue').textContent = bmi;
+                document.getElementById('bmiCategory').textContent = bmiCategory;
+                
+                // Cập nhật thanh tiến trình
+                let overallHealth = 85;
+                if (bmi < 18.5 || bmi >= 30) overallHealth -= 15;
+                if (healthData.heartRate > 100 || healthData.heartRate < 60) overallHealth -= 10;
+                
+                document.getElementById('overallHealth').textContent = overallHealth + '%';
+                document.querySelector('.progress-fill').style.width = overallHealth + '%';
+            } else {
+                document.getElementById('emptyState').style.display = 'block';
+                document.getElementById('healthStats').style.display = 'none';
+            }
+        }
+
+        // Xử lý submit form
+        document.getElementById('healthForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            healthData = {
+                height: parseFloat(document.getElementById('height').value),
+                weight: parseFloat(document.getElementById('weight').value),
+                bloodPressure: document.getElementById('bloodPressure').value,
+                heartRate: parseInt(document.getElementById('heartRate').value),
+                bloodType: document.getElementById('bloodType').value,
+                allergies: document.getElementById('allergies').value,
+                medications: document.getElementById('medications').value,
+                medicalHistory: document.getElementById('medicalHistory').value
+            };
+            
+            saveHealthData();
+            updateDisplay();
+            
+            // Hiển thị thông báo thành công
+            showNotification('Thông tin sức khỏe đã được lưu thành công!', 'success');
+        });
+
+        // Hiển thị thông báo
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 20px;
+                border-radius: 10px;
+                color: white;
+                font-weight: 500;
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+                background: ${type === 'success' ? '#28a745' : '#dc3545'};
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Thêm CSS animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Khởi tạo trang
+        document.addEventListener('DOMContentLoaded', function() {
+            loadHealthData();
+        });
+    </script>
+</body>
+</html>
