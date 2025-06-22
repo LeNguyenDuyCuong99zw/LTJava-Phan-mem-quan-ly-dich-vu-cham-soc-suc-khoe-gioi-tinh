@@ -7,7 +7,10 @@
       </div>
       <div class="auth">
         <i class="fa-regular fa-circle-user icon-user"></i>
-        <a href="#" id="loginBtn">Đăng nhập</a>
+        <span th:if="${session.userName != null}" style="font-weight:bold;">[[${session.userName}]]</span>
+        <a th:if="${session.userName == 'Admin'}" th:href="@{/dashboard}" style="margin-left:10px;font-weight:bold;color:#009879;">Dashboard</a>
+        <a href="#" id="loginBtn" th:if="${session.userName == null}">Đăng nhập</a>
+        <a th:href="@{/auth/logout}" th:if="${session.userName != null}" style="margin-left:10px;">Đăng xuất</a>
       </div>
     </div>
     <div class="main-header">
@@ -23,13 +26,16 @@
             >Đặt khám</a
           >
           <div class="dropdown-menu" id="dropdownMenu">
+            <a th:href="@{/appointment-booking}">Đặt khám online</a>
             <a href="#">Chuyên khoa</a>
             <a href="#">Cơ sở y tế</a>
             <a href="#">Bác sĩ</a>
           </div>
         </div>
+        <a th:href="@{/hiemmuon}">Hiếm Muộn</a>
+        <a th:href="@{/s_experiences}">Kinh nghiệm</a>
         <a href="#">Hỏi đáp bác sĩ</a>
-        <a href="#">Hồ sơ sức khỏe</a>
+        <a th:href="@{/health-records}">Hồ sơ sức khỏe</a>
       </nav>
       <div class="menu-icon" id="menuIcon">
         <span></span>
