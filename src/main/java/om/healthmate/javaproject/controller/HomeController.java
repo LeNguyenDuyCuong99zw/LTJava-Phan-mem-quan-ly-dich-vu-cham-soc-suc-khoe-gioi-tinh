@@ -11,7 +11,10 @@ public class HomeController {
         return "index";
     }
 
-
+    @GetMapping("/timhieu")
+    public String timHieu() {
+        return "pages/timhieu";
+    }
     @RequestMapping({
         "/s_experiences",
     })
