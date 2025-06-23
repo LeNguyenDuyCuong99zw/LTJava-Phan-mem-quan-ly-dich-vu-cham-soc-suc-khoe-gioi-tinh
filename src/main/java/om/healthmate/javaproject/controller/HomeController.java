@@ -53,4 +53,13 @@ public class HomeController {
     //public String appointmentBooking() {
     //    return "pages/appointment-booking";
     //}
+
+    @GetMapping("/bac-si-noi-bat")
+    public String showDoctorsPage() {
+        return "pages/doctors/doctorsListing";
+    }
+    @GetMapping("/bac-si-noi-bat/trang-2")
+    public String showDoctorsPage2() {
+        return "pages/doctors/doctorsListing2"; 
+}
 }
