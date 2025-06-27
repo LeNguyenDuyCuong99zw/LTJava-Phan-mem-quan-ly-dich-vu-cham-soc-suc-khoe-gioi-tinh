@@ -1,8 +1,5 @@
 package om.healthmate.javaproject.controller;
 
-import jakarta.servlet.http.HttpSession;
-import om.healthmate.javaproject.entity.User;
-import om.healthmate.javaproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import jakarta.servlet.http.HttpSession;
+import om.healthmate.javaproject.entity.User;
+import om.healthmate.javaproject.service.UserService;
 
 
 @Controller
@@ -26,21 +27,24 @@ public class AuthController {
         user.setPassword(password);
         userService.register(user);
         session.setAttribute("userName", user.getName());
+        session.setAttribute("userEmail", user.getEmail()); // Thêm dòng này
         session.setAttribute("role", "USER");
         return "redirect:/";
     }
-
+    
     @PostMapping("/login")
     public String login(@RequestParam String email, @RequestParam String password, HttpSession session, Model model) {
         // Đăng nhập admin cứng
-        if (email.equals("admin") && password.equals("12345")) {
+        if (email.equals("admin@gmail.com") && password.equals("12345")) {
             session.setAttribute("userName", "Admin");
+            session.setAttribute("userEmail", "admin@gmail.com"); // Thêm dòng này cho admin
             session.setAttribute("role", "ADMIN");
             return "redirect:/dashboard";
         }
         User user = userService.login(email, password);
         if (user != null) {
             session.setAttribute("userName", user.getName());
+            session.setAttribute("userEmail", user.getEmail()); // Thêm dòng này
             session.setAttribute("role", "USER");
             return "redirect:/";
         }
