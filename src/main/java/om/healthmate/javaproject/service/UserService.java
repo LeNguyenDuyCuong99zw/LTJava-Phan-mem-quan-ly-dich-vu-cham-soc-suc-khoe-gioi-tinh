@@ -1,9 +1,10 @@
 package om.healthmate.javaproject.service;
 
-import om.healthmate.javaproject.entity.User;
-import om.healthmate.javaproject.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import om.healthmate.javaproject.entity.User;
+import om.healthmate.javaproject.repository.UserRepository;
 
 @Service
 public class UserService {
@@ -32,5 +33,9 @@ public class UserService {
 
     public java.util.List<User> findAll() {
         return userRepository.findAll();
+    }
+    
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 } 
