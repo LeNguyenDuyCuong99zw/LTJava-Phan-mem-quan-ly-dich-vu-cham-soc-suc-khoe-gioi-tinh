@@ -1,6 +1,7 @@
 package om.healthmate.javaproject.entity;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -9,14 +10,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "NVARCHAR(255)")
+    @Column(columnDefinition = "NVARCHAR(255)", nullable = false)
     private String name;
 
-    @Column(columnDefinition = "NVARCHAR(255)")
+    @Column(columnDefinition = "NVARCHAR(255)", nullable = false, unique = true)
     private String email;
 
-    @Column(columnDefinition = "NVARCHAR(255)")
+    @Column(columnDefinition = "NVARCHAR(255)", nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Cycle> cycles;
 
     // Getters và setters
     public Long getId() { return id; }
@@ -27,4 +31,6 @@ public class User {
     public void setEmail(String email) { this.email = email; }
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
-} 
+    public List<Cycle> getCycles() { return cycles; }
+    public void setCycles(List<Cycle> cycles) { this.cycles = cycles; }
+}
