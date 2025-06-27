@@ -7,18 +7,34 @@
       </div>
       <div class="auth">
         <i class="fa-regular fa-circle-user icon-user"></i>
-        <span th:if="${session.userName != null}" style="font-weight:bold;">[[${session.userName}]]</span>
-        <a th:if="${session.userName == 'Admin'}" th:href="@{/dashboard}" style="margin-left:10px;font-weight:bold;color:#009879;">Dashboard</a>
-        <a href="#" id="loginBtn" th:if="${session.userName == null}">Đăng nhập</a>
-        <a th:href="@{/auth/logout}" th:if="${session.userName != null}" style="margin-left:10px;">Đăng xuất</a>
+        <span th:if="${session.userName != null}" style="font-weight: bold"
+          >[[${session.userName}]]</span
+        >
+        <a
+          th:if="${session.userName == 'Admin'}"
+          th:href="@{/dashboard}"
+          style="margin-left: 10px; font-weight: bold; color: #009879"
+          >Dashboard</a
+        >
+        <a th:href="@{/login}" id="loginBtn" th:if="${session.userName == null}"
+          >Đăng nhập</a
+        >
+        <a
+          th:href="@{/auth/logout}"
+          th:if="${session.userName != null}"
+          style="margin-left: 10px"
+          >Đăng xuất</a
+        >
       </div>
     </div>
     <div class="main-header">
       <div class="logo">
-        <img
-          src="https://ivie.vn/_next/image?url=%2F_next%2Fstatic%2FIVIE_logo.svg&w=384&q=75"
-          alt="Logo"
-        />
+        <a href="/" title="Trang chủ">
+          <img
+            src="https://ivie.vn/_next/image?url=%2F_next%2Fstatic%2FIVIE_logo.svg&w=384&q=75"
+            alt="Logo"
+          />
+        </a>
       </div>
       <nav class="nav">
         <div class="dropdown-wrap" id="dropdownWrap">
@@ -29,7 +45,9 @@
             <a th:href="@{/appointment-booking}">Đặt khám online</a>
             <a href="#">Chuyên khoa</a>
             <a href="#">Cơ sở y tế</a>
-            <a href="#">Bác sĩ</a>
+            <a th:href="@{/bac-si-noi-bat}">Bác sĩ</a>
+            <a th:href="@{/cycles}">Xem lịch sử chu kỳ</a>
+            <a th:href="@{/cycles}">Khai báo chu kỳ mới</a>
           </div>
         </div>
         <a th:href="@{/hiemmuon}">Hiếm Muộn</a>
@@ -51,15 +69,40 @@
           class="menu-title"
           style="font-size: 18px; color: #00103a; font-weight: 600"
         >
+          <span th:if="${session.userName == null}">
             <a
-            href="#" id="loginBtn"
-            style="color: #00103a; text-decoration: none; margin-right: 12px"
-            >Đăng ký</a
-          >
-          / 
-          <a href="#" style="color: #00103a; text-decoration: none"
-          id="loginBtn">Đăng nhập</a
-          >
+              th:href="@{/register}"
+              style="color: #00103a; text-decoration: none; margin-right: 12px"
+              >Đăng ký</a
+            >
+            /
+            <a
+              th:href="@{/login}"
+              style="color: #00103a; text-decoration: none"
+              id="loginBtn"
+              >Đăng nhập</a
+            >
+          </span>
+          <span th:if="${session.userName != null}">
+            <i class="fa-regular fa-circle-user icon-user"></i>
+            <span style="font-weight: bold">[[${session.userName}]]</span>
+            <a
+              th:href="@{/auth/logout}"
+              style="
+                margin-left: 10px;
+                color: black;
+                background: #e0f2ef;
+                padding: 6px 16px;
+                border-radius: 4px;
+                font-weight: 600;
+                text-decoration: none;
+                transition: background 0.2s;
+              "
+              onmouseover="this.style.background='#b4dbd3'"
+              onmouseout="this.style.background='#e0f2ef'"
+              >Đăng xuất</a
+            >
+          </span>
         </div>
       </div>
       <div class="divider"></div>
@@ -69,12 +112,17 @@
             >Đặt khám</a
           >
           <div class="dropdown-content" id="dropdownContentMobile">
+            <a th:href="@{/appointment-booking}">Đặt khám online</a>
             <a href="#">Chuyên khoa</a>
             <a href="#">Cơ sở y tế</a>
-            <a href="#">Bác sĩ</a>
+            <a th:href="@{/bac-si-noi-bat}">Bác sĩ</a>
+            <a th:href="@{/cycles}">Xem lịch sử chu kỳ</a>
+            <a th:href="@{/cycles}">Khai báo chu kỳ mới</a>
           </div>
+          <a th:href="@{/hiemmuon}">Hiếm Muộn</a>
+          <a th:href="@{/s_experiences}">Kinh nghiệm</a>
           <a href="#">Hỏi đáp bác sĩ</a>
-          <a href="#">Hồ sơ sức khỏe</a>
+          <a th:href="@{/health-records}">Hồ sơ sức khỏe</a>
         </div>
       </div>
       <div class="divider"></div>

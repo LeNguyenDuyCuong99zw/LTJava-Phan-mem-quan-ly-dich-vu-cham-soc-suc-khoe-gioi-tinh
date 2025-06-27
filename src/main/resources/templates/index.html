@@ -1,33 +1,17 @@
 <!DOCTYPE html>
-<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<html
+  lang="vi"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}"
+>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IVIE - BÁC SĨ ƠI</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}" />
-    <link rel="stylesheet" th:href="@{/css/contentmain.css}" />
-    <link rel="stylesheet" th:href="@{/css/footer.css}" />
-    <link rel="stylesheet" th:href="@{/css/header.css}" />
-    <link rel="stylesheet" th:href="@{/css/overlay.css}" />
-    <link rel="stylesheet" th:href="@{/css/chatbox.css}" />
-    <link rel="stylesheet" th:href="@{/css/contact.css}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <title>Trang chủ</title>
   </head>
   <body>
-    <div th:replace="~{fragments/header :: siteHeader}"></div>
-    <div th:replace="~{pages/home :: homeContent}"></div>
-    <div th:replace="~{fragments/overlay :: overlay}"></div>
-    <div th:if="${message}" style="color:green;text-align:center;">[[${message}]]</div>
-    <div th:if="${error}" style="color:red;text-align:center;">[[${error}]]</div>
-    <div th:replace="~{fragments/contact :: contactSection}"></div>
-    <div th:replace="~{fragments/footer :: siteFooter}"></div>
-    
-    <div th:replace="~{fragments/chatbox :: chatBox}"></div>
-
-    <script th:src="@{/js/overlay.js}" defer></script>
-    <script th:src="@{/js/chatbox.js}" defer></script>
-    <script th:src="@{/js/main.js}" defer></script>
-
+    <div layout:fragment="content">
+      <div th:replace="~{pages/home :: homeContent}"></div>
+      <div th:replace="~{fragments/contact :: contactSection}"></div>
+    </div>
   </body>
 </html>
