@@ -6,10 +6,29 @@
 }
 
 .ivie-hero-bg {
-  min-height: 100vh;
-  background: linear-gradient(180deg, #e6f6f2 0%, #1abc9c 100%);
+  min-height: 90vh;
+  background: url("/images/icon_video/snapedit_1750451495537.jpeg") no-repeat
+    center center/cover;
   position: relative;
   overflow: hidden;
+  border: 6px solid;
+  border-image: linear-gradient(90deg, #e6f6f2 0%, #1abc9c 100%) 1;
+  border-image-slice: 1;
+}
+
+@media (max-width: 900px) {
+  .ivie-hero-bg {
+    background: linear-gradient(180deg, #e6f6f2 0%, #1abc9c 100%);
+  }
+}
+
+@media (max-width: 600px) {
+  .ivie-hero-bg {
+    min-height: 60vh;
+    border-width: 3px;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #e6f6f2 0%, #1abc9c 100%);
+  }
 }
 
 .ivie-hero-container {
@@ -66,6 +85,19 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+  border: 2px solid transparent;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.1s;
+}
+.ivie-feature-card:hover,
+.ivie-feature-card:focus {
+  border-color: #13a97b;
+  box-shadow: 0 2px 12px rgba(19, 169, 123, 0.18);
+  transform: translateY(2px) scale(0.97);
+}
+.ivie-feature-card:active {
+  border-color: #13a97b;
+  box-shadow: 0 2px 12px rgba(19, 169, 123, 0.18);
+  transform: scale(0.98);
 }
 
 .ivie-feature-card img {
@@ -108,6 +140,23 @@
 .ivie-qr {
   height: 40px;
   margin-left: 10px;
+  border: 2px solid white;
+  border-radius: 10px;
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.1s;
+  box-shadow: 0 2px 8px rgba(19, 169, 123, 0.1);
+  background: #fff;
+  cursor: pointer;
+}
+.ivie-qr:hover,
+.ivie-qr:focus {
+  border-color: #d72660;
+  box-shadow: 0 4px 16px rgba(21, 101, 192, 0.15);
+  transform: scale(1.04);
+}
+.ivie-qr:active {
+  border-color: #d72660;
+  box-shadow: 0 2px 8px rgba(19, 169, 123, 0.18);
+  transform: scale(0.97);
 }
 
 .ivie-hero-right {
