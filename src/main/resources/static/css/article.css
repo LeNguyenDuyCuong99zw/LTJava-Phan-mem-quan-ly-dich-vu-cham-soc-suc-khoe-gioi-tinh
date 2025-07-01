@@ -39,6 +39,9 @@
     height: auto;
     margin-bottom: 40px;
     border-radius: 8px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .article-content h2 {
@@ -133,9 +136,10 @@
 
 .related-articles__container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    text-align: left;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .related-articles__card {
@@ -146,6 +150,10 @@
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     transition: box-shadow 0.3s;
     overflow: hidden;
+    width: 100%;
+    min-width: 300px;
+    max-width: 350px;
+    margin: 0 auto;
 }
 
 .related-articles__card:hover {
@@ -195,4 +203,24 @@
     color: #555;
     line-height: 1.6;
     margin: 0;
+}
+
+.related-articles__card a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .related-articles__container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .related-articles__container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
 } 
