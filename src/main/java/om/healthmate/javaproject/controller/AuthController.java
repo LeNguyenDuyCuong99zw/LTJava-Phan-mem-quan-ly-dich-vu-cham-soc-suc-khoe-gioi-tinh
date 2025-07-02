@@ -20,15 +20,25 @@ public class AuthController {
     private UserService userService;
 
     @PostMapping("/register")
-    public String register(@RequestParam String name, @RequestParam String email, @RequestParam String password, Model model, HttpSession session) {
+    public String register(@RequestParam String name, @RequestParam String email, @RequestParam String password,
+                          @RequestParam(required = false) String role, Model model, HttpSession session) {
         User user = new User();
         user.setName(name);
         user.setEmail(email);
         user.setPassword(password);
+        if (role != null && !role.isEmpty()) {
+            user.setRole(role);
+        } else {
+            user.setRole("USER");
+        }
         userService.register(user);
         session.setAttribute("userName", user.getName());
-        session.setAttribute("userEmail", user.getEmail()); // Thêm dòng này
-        session.setAttribute("role", "USER");
+        session.setAttribute("userEmail", user.getEmail());
+        session.setAttribute("role", user.getRole());
+        // Nếu đăng ký là bác sĩ thì chuyển hướng về trang hỏi đáp bác sĩ
+        if ("DOCTOR".equals(user.getRole())) {
+            return "redirect:/cong-dong";
+        }
         return "redirect:/";
     }
     
@@ -37,15 +47,18 @@ public class AuthController {
         // Đăng nhập admin cứng
         if (email.equals("admin@gmail.com") && password.equals("12345")) {
             session.setAttribute("userName", "Admin");
-            session.setAttribute("userEmail", "admin@gmail.com"); // Thêm dòng này cho admin
+            session.setAttribute("userEmail", "admin@gmail.com");
             session.setAttribute("role", "ADMIN");
+            session.setAttribute("userId", 0L); // Đặt userId cho admin là 0L (hoặc null tuỳ ý)
             return "redirect:/dashboard";
         }
         User user = userService.login(email, password);
         if (user != null) {
             session.setAttribute("userName", user.getName());
-            session.setAttribute("userEmail", user.getEmail()); // Thêm dòng này
-            session.setAttribute("role", "USER");
+            session.setAttribute("userEmail", user.getEmail());
+            session.setAttribute("role", user.getRole());
+            session.setAttribute("userId", user.getId()); // Đảm bảo userId luôn có trong session
+            // Không tự động chuyển sang /cong-dong cho bác sĩ nữa
             return "redirect:/";
         }
         model.addAttribute("error", "Sai thông tin đăng nhập!");
