@@ -11,8 +11,17 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+
     public User register(User user) {
+        // Nếu chưa set role thì mặc định là USER
+        if (user.getRole() == null || user.getRole().isEmpty()) {
+            user.setRole("USER");
+        }
         return userRepository.save(user);
+    }
+
+    public User findById(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 
     public User login(String email, String password) {
