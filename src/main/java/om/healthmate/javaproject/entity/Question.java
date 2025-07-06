@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "questions")
@@ -44,12 +45,14 @@ public class Question {
     // Phân công bác sĩ trả lời (admin thao tác)
     @ManyToOne
     @JoinColumn(name = "assigned_doctor_id")
+    @JsonIgnore
     private User assignedDoctor;
 
     private LocalDateTime assignedAt;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     public Long getId() { return id; }

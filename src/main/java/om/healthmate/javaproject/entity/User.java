@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "users")
@@ -26,24 +27,29 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "NVARCHAR(255)", nullable = false)
+    @Column(columnDefinition = "VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci", nullable = false)
     private String name;
 
-    @Column(columnDefinition = "NVARCHAR(255)", nullable = false, unique = true)
+    @Column(columnDefinition = "VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci", nullable = false, unique = true)
     private String email;
 
-    @Column(columnDefinition = "NVARCHAR(255)", nullable = false)
+    @Column(columnDefinition = "VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci", nullable = false)
     private String password;
 
-    @Column(columnDefinition = "NVARCHAR(50)", nullable = false)
+    @Column(columnDefinition = "VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci", nullable = false)
     private String role; // USER, DOCTOR, ADMIN
 
 
-    @Column(columnDefinition = "NVARCHAR(100)")
+    @Column(columnDefinition = "VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
     private String specialization; // Chuyên khoa cho bác sĩ
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Cycle> cycles;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<HealthRecord> healthRecords;
 
     // Getters và setters
     public Long getId() { return id; }
@@ -60,4 +66,6 @@ public class User {
     public void setSpecialization(String specialization) { this.specialization = specialization; }
     public List<Cycle> getCycles() { return cycles; }
     public void setCycles(List<Cycle> cycles) { this.cycles = cycles; }
+    public List<HealthRecord> getHealthRecords() { return healthRecords; }
+    public void setHealthRecords(List<HealthRecord> healthRecords) { this.healthRecords = healthRecords; }
 }
