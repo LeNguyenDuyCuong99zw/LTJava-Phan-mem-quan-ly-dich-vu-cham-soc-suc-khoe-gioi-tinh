@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class PillReminder {
@@ -22,6 +23,7 @@ public class PillReminder {
 
     @ManyToOne
     @JoinColumn(name = "cycle_id")
+    @JsonIgnore
     private Cycle cycle;
 
     public PillReminder() {}
