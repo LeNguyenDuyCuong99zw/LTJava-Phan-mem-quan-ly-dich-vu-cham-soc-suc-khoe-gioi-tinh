@@ -7,8 +7,7 @@
 >
   <head>
     <title>Hồ Sơ Sức Khỏe | HealthMate</title>
-    <link rel="stylesheet" th:href="@{/css/hiemmuon.css}" />
-    <link rel="stylesheet" th:href="@{/css/appointment.css}" />
+    <link rel="stylesheet" th:href="@{/css/health-records.css}" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
@@ -196,32 +195,86 @@
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script>
+    <script th:inline="javascript">
       // Khởi tạo dữ liệu mẫu
       let healthData = {
-        height: 170,
-        weight: 65,
-        bloodPressure: "120/80",
-        heartRate: 72,
-        bloodType: "A+",
-        allergies: "Không có",
-        medications: "Không có",
-        medicalHistory: "Không có",
+        height: null,
+        weight: null,
+        bloodPressure: "",
+        heartRate: null,
+        bloodType: "",
+        allergies: "",
+        medications: "",
+        medicalHistory: "",
       };
 
-      // Load dữ liệu từ localStorage
-      function loadHealthData() {
-        const saved = localStorage.getItem("healthData");
-        if (saved) {
-          healthData = JSON.parse(saved);
-          updateForm();
-          updateDisplay();
+      // Lấy user ID từ Thymeleaf
+      const currentUserId = /*[[${currentUserId}]]*/ 0;
+
+      // Load dữ liệu từ API
+      async function loadHealthData() {
+        try {
+          const response = await fetch(`/api/health-records/user/${currentUserId}`);
+          if (response.ok) {
+            const data = await response.json();
+            if (data) {
+              healthData = {
+                id: data.id,
+                height: data.height,
+                weight: data.weight,
+                bloodPressure: data.bloodPressure || "",
+                heartRate: data.heartRate,
+                bloodType: data.bloodType || "",
+                allergies: data.allergies || "",
+                medications: data.medications || "",
+                medicalHistory: data.medicalHistory || "",
+              };
+              updateForm();
+              updateDisplay();
+            }
+          }
+        } catch (error) {
+          console.error('Lỗi khi tải dữ liệu:', error);
         }
       }
 
-      // Lưu dữ liệu vào localStorage
-      function saveHealthData() {
-        localStorage.setItem("healthData", JSON.stringify(healthData));
+      // Lưu dữ liệu vào API
+      async function saveHealthData() {
+        try {
+          const dataToSend = {
+            user: { id: currentUserId },
+            height: healthData.height,
+            weight: healthData.weight,
+            bloodPressure: healthData.bloodPressure,
+            heartRate: healthData.heartRate,
+            bloodType: healthData.bloodType,
+            allergies: healthData.allergies,
+            medications: healthData.medications,
+            medicalHistory: healthData.medicalHistory,
+          };
+
+          const method = healthData.id ? 'PUT' : 'POST';
+          const url = healthData.id ? `/api/health-records/${healthData.id}` : '/api/health-records';
+
+          const response = await fetch(url, {
+            method: method,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dataToSend)
+          });
+
+          if (response.ok) {
+            const savedData = await response.json();
+            healthData.id = savedData.id;
+            return true;
+          } else {
+            throw new Error('Lỗi khi lưu dữ liệu');
+          }
+        } catch (error) {
+          console.error('Lỗi khi lưu dữ liệu:', error);
+          return false;
+        }
       }
 
       // Cập nhật form
@@ -266,27 +319,27 @@
 
           // Cập nhật thông tin cơ bản
           document.getElementById("displayHeight").textContent =
-            healthData.height;
+            healthData.height || "--";
           document.getElementById("displayWeight").textContent =
-            healthData.weight;
+            healthData.weight || "--";
           document.getElementById("displayBloodType").textContent =
-            healthData.bloodType;
+            healthData.bloodType || "--";
           document.getElementById("displayBloodPressure").textContent =
-            healthData.bloodPressure;
+            healthData.bloodPressure || "--";
           document.getElementById("displayHeartRate").textContent =
-            healthData.heartRate;
+            healthData.heartRate || "--";
 
           // Tính và hiển thị BMI
           const bmi = calculateBMI(healthData.height, healthData.weight);
           const bmiCategory = getBMICategory(bmi);
 
-          document.getElementById("bmiValue").textContent = bmi;
-          document.getElementById("bmiCategory").textContent = bmiCategory;
+          document.getElementById("bmiValue").textContent = bmi || "--";
+          document.getElementById("bmiCategory").textContent = bmiCategory || "--";
 
           // Cập nhật thanh tiến trình
           let overallHealth = 85;
-          if (bmi < 18.5 || bmi >= 30) overallHealth -= 15;
-          if (healthData.heartRate > 100 || healthData.heartRate < 60)
+          if (bmi && (bmi < 18.5 || bmi >= 30)) overallHealth -= 15;
+          if (healthData.heartRate && (healthData.heartRate > 100 || healthData.heartRate < 60))
             overallHealth -= 10;
 
           document.getElementById("overallHealth").textContent =
@@ -302,28 +355,34 @@
       // Xử lý submit form
       document
         .getElementById("healthForm")
-        .addEventListener("submit", function (e) {
+        .addEventListener("submit", async function (e) {
           e.preventDefault();
 
           healthData = {
-            height: parseFloat(document.getElementById("height").value),
-            weight: parseFloat(document.getElementById("weight").value),
+            id: healthData.id,
+            height: parseFloat(document.getElementById("height").value) || null,
+            weight: parseFloat(document.getElementById("weight").value) || null,
             bloodPressure: document.getElementById("bloodPressure").value,
-            heartRate: parseInt(document.getElementById("heartRate").value),
+            heartRate: parseInt(document.getElementById("heartRate").value) || null,
             bloodType: document.getElementById("bloodType").value,
             allergies: document.getElementById("allergies").value,
             medications: document.getElementById("medications").value,
             medicalHistory: document.getElementById("medicalHistory").value,
           };
 
-          saveHealthData();
-          updateDisplay();
-
-          // Hiển thị thông báo thành công
-          showNotification(
-            "Thông tin sức khỏe đã được lưu thành công!",
-            "success"
-          );
+          const success = await saveHealthData();
+          if (success) {
+            updateDisplay();
+            showNotification(
+              "Thông tin sức khỏe đã được lưu thành công!",
+              "success"
+            );
+          } else {
+            showNotification(
+              "Có lỗi xảy ra khi lưu thông tin!",
+              "error"
+            );
+          }
         });
 
       // Hiển thị thông báo
