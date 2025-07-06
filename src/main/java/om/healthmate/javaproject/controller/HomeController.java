@@ -44,10 +44,7 @@ public class HomeController {
 
 
     
-    @GetMapping("/health-records")
-    public String healthRecords(){
-        return "pages/health-records"; 
-    }
+
 
     //@GetMapping("/appointment-booking")
     //public String appointmentBooking() {
