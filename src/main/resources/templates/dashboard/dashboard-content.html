@@ -3,36 +3,51 @@
     <div class="dashboard-welcome">Chào mừng bạn đến với hệ thống quản lý sức khỏe sinh sản. Hãy chọn module bên dưới để bắt đầu quản lý!</div>
    
     <div class="dashboard-modules">
-        <div class="module-card">
+        <a class="module-card" th:href="@{/dashboard/users}">
             <div class="module-icon"><i class="fa-solid fa-users"></i></div>
             <div class="module-title">Quản lý người dùng</div>
             <div class="module-desc">Thêm, sửa, xóa, tìm kiếm người dùng hệ thống.</div>
-        </div>
-        <div class="module-card">
+        </a>
+        <a class="module-card" th:href="@{/dashboard/doctors}">
             <div class="module-icon"><i class="fa-solid fa-user-doctor"></i></div>
             <div class="module-title">Quản lý bác sĩ</div>
             <div class="module-desc">Quản lý thông tin, chuyên khoa, lịch làm việc của bác sĩ.</div>
-        </div>
-        <div class="module-card">
+        </a>
+        <a class="module-card" th:href="@{/dashboard/hospitals}">
             <div class="module-icon"><i class="fa-solid fa-hospital"></i></div>
             <div class="module-title">Quản lý cơ sở y tế</div>
             <div class="module-desc">Thêm, sửa, xóa các cơ sở y tế liên kết.</div>
-        </div>
-        <div class="module-card">
+        </a>
+        <a class="module-card" th:href="@{/dashboard/services}">
             <div class="module-icon"><i class="fa-solid fa-notes-medical"></i></div>
             <div class="module-title">Quản lý dịch vụ</div>
             <div class="module-desc">Quản lý các dịch vụ chăm sóc sức khỏe, xét nghiệm, tư vấn.</div>
-        </div>
-        <div class="module-card">
+        </a>
+        <a class="module-card" th:href="@{/dashboard/appointments}">
             <div class="module-icon"><i class="fa-solid fa-calendar-check"></i></div>
             <div class="module-title">Lịch hẹn</div>
             <div class="module-desc">Quản lý lịch hẹn khám, lịch sử đặt lịch của người dùng.</div>
-        </div>
-        <div class="module-card">
+        </a>
+        <a class="module-card" th:href="@{/dashboard/settings}">
             <div class="module-icon"><i class="fa-solid fa-gear"></i></div>
             <div class="module-title">Cài đặt hệ thống</div>
             <div class="module-desc">Tùy chỉnh thông tin, cấu hình hệ thống.</div>
-        </div>
+        </a>
+        <a class="module-card" th:href="@{/dashboard/statistics}">
+            <div class="module-icon"><i class="fa-solid fa-chart-bar"></i></div>
+            <div class="module-title">Thống kê</div>
+            <div class="module-desc">Xem thống kê tổng quan hệ thống.</div>
+        </a>
+        <a class="module-card" th:href="@{/dashboard/feedback}">
+            <div class="module-icon"><i class="fa-solid fa-comments"></i></div>
+            <div class="module-title">Quản lý Feedback</div>
+            <div class="module-desc">Quản lý phản hồi, góp ý từ người dùng.</div>
+        </a>
+        <a class="module-card" th:href="@{/dashboard/consultants}">
+            <div class="module-icon"><i class="fa-solid fa-user-tie"></i></div>
+            <div class="module-title">Quản lý thông tin tư vấn viên</div>
+            <div class="module-desc">Quản lý danh sách, thông tin tư vấn viên.</div>
+        </a>
     </div>
    <!-- <div class="dashboard-chart-section">
         <div class="dashboard-chart-title">Thống kê truy cập website</div>
@@ -81,6 +96,8 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 <style>
+
+
 .dashboard-chart-section {
     background: #fff;
     border-radius: 16px;
