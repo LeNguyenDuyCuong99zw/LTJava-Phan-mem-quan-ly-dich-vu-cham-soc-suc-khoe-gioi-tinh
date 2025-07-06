@@ -1,7 +1,13 @@
 package om.healthmate.javaproject.entity;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "articles")
@@ -15,7 +21,7 @@ public class Article {
 
     private String category;
 
-    @Column(columnDefinition = "NVARCHAR(MAX)", nullable = false)
+    @Column(columnDefinition = "LONGTEXT", nullable = false)
     private String content;
     @Column(name = "image_url")
     private String imageUrl;
