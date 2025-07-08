@@ -1,10 +1,18 @@
+
 package om.healthmate.javaproject.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+
 @Controller
 public class HomeController {
+
+    @GetMapping("/doctor_dash/doctor-dashboard")
+    public String doctorDashboard() {
+        return "doctor_dash/doctor-dashboard";
+    }
 
     @GetMapping("/")
     public String home() {
@@ -19,7 +27,7 @@ public class HomeController {
         "/s_experiences",
     })
     public String s_exper(){
-        return "pages/s_experiences"; 
+        return "pages/s_experiences";
     }
     @GetMapping("/page_s_1")
     public String pageS1() {
@@ -43,20 +51,5 @@ public class HomeController {
     }
 
 
-    
 
-
-    //@GetMapping("/appointment-booking")
-    //public String appointmentBooking() {
-    //    return "pages/appointment-booking";
-    //}
-
-    @GetMapping("/bac-si-noi-bat")
-    public String showDoctorsPage() {
-        return "pages/doctors/doctorsListing";
-    }
-    @GetMapping("/bac-si-noi-bat/trang-2")
-    public String showDoctorsPage2() {
-        return "pages/doctors/doctorsListing2"; 
-}
 }

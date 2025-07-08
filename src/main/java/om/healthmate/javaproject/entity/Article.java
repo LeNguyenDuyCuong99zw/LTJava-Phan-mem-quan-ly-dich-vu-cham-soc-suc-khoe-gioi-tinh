@@ -21,7 +21,7 @@ public class Article {
 
     private String category;
 
-    @Column(columnDefinition = "NVARCHAR(MAX)", nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
     @Column(name = "image_url")
     private String imageUrl;

@@ -27,6 +27,9 @@
             <a th:href="@{/appointment-history}" class="hm-dropdown-link"
               >Lịch sử đặt khám</a
             >
+            <a th:href="@{/test-orders/list}" class="hm-dropdown-link">
+              Lịch sử xét nghiệm
+            </a>
             <a th:href="@{/health-records}" class="hm-dropdown-link"
               >Hồ sơ sức khỏe</a
             >
@@ -42,6 +45,14 @@
         <a th:href="@{/login}" id="loginBtn" th:if="${session.userName == null}"
           >Đăng nhập / Đăng Ký</a
         >
+        <span th:if="${session.role == 'DOCTOR'}">
+          <a
+            th:href="@{/doctor_dash/doctor-dashboard}"
+            class="hm-dropdown-link"
+            style="color: #00bfae; font-weight: 700"
+            >DoctorIVIE</a
+          >
+        </span>
       </div>
     </div>
     <div class="main-header">
@@ -60,11 +71,11 @@
           >
           <div class="dropdown-menu" id="dropdownMenu">
             <a th:href="@{/appointment-booking}">Đặt khám online</a>
-            <a href="#">Chuyên khoa</a>
+            <a th:href="@{/dichvu}">Chuyên khoa</a>
             <a href="#">Cơ sở y tế</a>
             <a th:href="@{/bac-si-noi-bat}">Bác sĩ</a>
-            <a th:href="@{/cycles}">Xem lịch sử chu kỳ</a>
             <a th:href="@{/cycles}">Khai báo chu kỳ mới</a>
+            <a th:href="@{/test-orders/book}">Đặt lịch xét nghiệm STIs</a>
           </div>
         </div>
         <a th:href="@{/hiemmuon}">Hiếm Muộn</a>
