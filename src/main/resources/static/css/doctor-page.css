@@ -128,10 +128,6 @@ html {
   appearance: none;
 }
 
-.filter-bar__select::-ms-expand {
-  display: none;
-}
-
 .filter-bar__dropdown-icon {
   position: absolute;
   right: 15px;
@@ -157,10 +153,6 @@ html {
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-.filter-bar__more-filters-btn:hover {
-  background-color: #0056b3;
 }
 
 .doctor-grid {
@@ -266,10 +258,6 @@ html {
   font-weight: bold;
 }
 
-.doctor-card__btn:hover {
-  background-color: #249d80;
-}
-
 .doctor-card__btn-icon {
   font-size: 1.1em;
   line-height: 1;
@@ -294,20 +282,14 @@ html {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.pagination__link:hover {
-  background-color: #007bff;
-  color: white;
-}
-
 .pagination__link--active {
   background-color: #007bff;
   color: white;
   border-color: #007bff;
 }
-
-.pagination__dots {
-  padding: 8px 0;
-  color: #777;
+.time-slot.active {
+  color: green;
+  font-weight: bold;
 }
 
 @media (max-width: 1200px) {
@@ -350,11 +332,5 @@ html {
   }
   .doctor-grid {
     grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 480px) {
-  .filter-bar__item {
-    width: 100%;
   }
 }
