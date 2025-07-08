@@ -21,7 +21,45 @@
           <p>Quản lý và theo dõi thông tin sức khỏe của bạn</p>
         </div>
 
-        <div class="records-grid">
+        <div
+          th:if="${currentUserId == null}"
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 400px;
+          "
+        >
+          <div>
+            <div
+              class="spinner"
+              style="
+                margin: 0 auto;
+                width: 80px;
+                height: 80px;
+                border: 10px solid #f3f3f3;
+                border-top: 10px solid #3498db;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+              "
+            ></div>
+            <p style="text-align: center; margin-top: 20px; color: #888">
+              Đang tải...
+            </p>
+          </div>
+        </div>
+        <style>
+          @keyframes spin {
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+        </style>
+
+        <div th:if="${currentUserId != null}" class="records-grid">
           <!-- Form nhập liệu -->
           <div class="form-section">
             <h2 class="section-title">
@@ -214,7 +252,9 @@
       // Load dữ liệu từ API
       async function loadHealthData() {
         try {
-          const response = await fetch(`/api/health-records/user/${currentUserId}`);
+          const response = await fetch(
+            `/api/health-records/user/${currentUserId}`
+          );
           if (response.ok) {
             const data = await response.json();
             if (data) {
@@ -234,7 +274,7 @@
             }
           }
         } catch (error) {
-          console.error('Lỗi khi tải dữ liệu:', error);
+          console.error("Lỗi khi tải dữ liệu:", error);
         }
       }
 
@@ -253,15 +293,17 @@
             medicalHistory: healthData.medicalHistory,
           };
 
-          const method = healthData.id ? 'PUT' : 'POST';
-          const url = healthData.id ? `/api/health-records/${healthData.id}` : '/api/health-records';
+          const method = healthData.id ? "PUT" : "POST";
+          const url = healthData.id
+            ? `/api/health-records/${healthData.id}`
+            : "/api/health-records";
 
           const response = await fetch(url, {
             method: method,
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
-            body: JSON.stringify(dataToSend)
+            body: JSON.stringify(dataToSend),
           });
 
           if (response.ok) {
@@ -269,10 +311,10 @@
             healthData.id = savedData.id;
             return true;
           } else {
-            throw new Error('Lỗi khi lưu dữ liệu');
+            throw new Error("Lỗi khi lưu dữ liệu");
           }
         } catch (error) {
-          console.error('Lỗi khi lưu dữ liệu:', error);
+          console.error("Lỗi khi lưu dữ liệu:", error);
           return false;
         }
       }
@@ -334,12 +376,16 @@
           const bmiCategory = getBMICategory(bmi);
 
           document.getElementById("bmiValue").textContent = bmi || "--";
-          document.getElementById("bmiCategory").textContent = bmiCategory || "--";
+          document.getElementById("bmiCategory").textContent =
+            bmiCategory || "--";
 
           // Cập nhật thanh tiến trình
           let overallHealth = 85;
           if (bmi && (bmi < 18.5 || bmi >= 30)) overallHealth -= 15;
-          if (healthData.heartRate && (healthData.heartRate > 100 || healthData.heartRate < 60))
+          if (
+            healthData.heartRate &&
+            (healthData.heartRate > 100 || healthData.heartRate < 60)
+          )
             overallHealth -= 10;
 
           document.getElementById("overallHealth").textContent =
@@ -363,7 +409,8 @@
             height: parseFloat(document.getElementById("height").value) || null,
             weight: parseFloat(document.getElementById("weight").value) || null,
             bloodPressure: document.getElementById("bloodPressure").value,
-            heartRate: parseInt(document.getElementById("heartRate").value) || null,
+            heartRate:
+              parseInt(document.getElementById("heartRate").value) || null,
             bloodType: document.getElementById("bloodType").value,
             allergies: document.getElementById("allergies").value,
             medications: document.getElementById("medications").value,
@@ -378,10 +425,7 @@
               "success"
             );
           } else {
-            showNotification(
-              "Có lỗi xảy ra khi lưu thông tin!",
-              "error"
-            );
+            showNotification("Có lỗi xảy ra khi lưu thông tin!", "error");
           }
         });
 
