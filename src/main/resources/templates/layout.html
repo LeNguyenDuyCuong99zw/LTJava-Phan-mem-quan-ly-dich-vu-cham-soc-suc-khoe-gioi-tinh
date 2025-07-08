@@ -15,6 +15,7 @@
     <link rel="stylesheet" th:href="@{/css/overlay.css}" />
     <link rel="stylesheet" th:href="@{/css/chatbox.css}" />
     <link rel="stylesheet" th:href="@{/css/contact.css}" />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -115,5 +116,26 @@
     <script th:src="@{/js/overlay.js}" defer></script>
     <script th:src="@{/js/chatbox.js}" defer></script>
     <script th:src="@{/js/main.js}" defer></script>
+    <script th:if="${bookingSuccess}" th:inline="javascript">
+      window.addEventListener("DOMContentLoaded", function () {
+        let popup = document.createElement("div");
+        popup.textContent = "✅ Đặt lịch thành công!";
+        popup.style.position = "fixed";
+        popup.style.top = "20px";
+        popup.style.right = "20px";
+        popup.style.padding = "14px 20px";
+        popup.style.backgroundColor = "#4caf50";
+        popup.style.color = "#fff";
+        popup.style.borderRadius = "8px";
+        popup.style.boxShadow = "0 2px 8px rgba(0,0,0,0.2)";
+        popup.style.zIndex = 9999;
+        document.body.appendChild(popup);
+
+        setTimeout(() => {
+          popup.style.opacity = "0";
+          setTimeout(() => popup.remove(), 300);
+        }, 3000);
+      });
+    </script>
   </body>
 </html>
