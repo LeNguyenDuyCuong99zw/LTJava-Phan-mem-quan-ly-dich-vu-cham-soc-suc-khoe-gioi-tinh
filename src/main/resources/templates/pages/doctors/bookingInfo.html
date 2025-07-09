@@ -148,7 +148,7 @@
             const symptomTextarea = document.getElementById("symptom");
             const symptomInput = document.getElementById("symptomInput");
 
-            const isLoggedIn = false;
+            const isLoggedIn = /*[[${session.userName != null}]]*/ false;
 
             nextBtn.addEventListener("click", function (e) {
               const symptom = symptomTextarea.value.trim();
